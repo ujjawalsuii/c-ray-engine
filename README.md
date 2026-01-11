@@ -1,68 +1,112 @@
 <div align="center">
 
-# 🏎️ C-Ray Engine
+# C-Ray Engine
 ### High-Performance 3D Ray Tracing Engine in Pure C
 
-![C](https://img.shields.io/badge/C-00599C?style=for-the-badge&logo=c&logoColor=white)
-![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
-![Math](https://img.shields.io/badge/Linear_Algebra-Physics-red?style=for-the-badge)
+![C](https://img.shields.io/badge/C-Standard-00599C?style=flat-square&logo=c&logoColor=white)
+![Rendering](https://img.shields.io/badge/Rendering-Physics_Based-red?style=flat-square)
+![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
 
 <br />
 
-<img src="assets/main2.png" width="800" alt="Ray Tracer Render Output" />
+<img src="assets/water_city_night.png" width="100%" alt="Cyberpunk Night City Render" />
 
 </div>
 
----
+<br />
 
-## 💡 Project Overview
+## Project Overview
 
 **C-Ray** is a physics-based rendering engine built entirely from scratch in standard C. Unlike modern engines that rely on OpenGL or DirectX, this project implements the mathematical foundations of computer graphics—vector calculus, ray-object intersection, and lighting physics—without external graphics libraries.
 
-The goal of this project was to engineer a high-performance system that manages its own memory, defines its own linear algebra structures, and produces high-resolution, anti-aliased images via raw pixel manipulation.
+The goal was to engineer a high-performance system that manages its own memory, defines its own linear algebra structures, and produces high-resolution, anti-aliased images via raw pixel manipulation.
+
+Recently, the engine has been upgraded to support **Dual-Mode Rendering**, capable of simulating both realistic daytime physics (Fresnel water, directional sunlight) and stylized Cyberpunk aesthetics (procedural neon, exponential fog) from the same scene data.
 
 ---
 
-## 🛠️ Key Technical Features
+## Key Technical Features
 
 ### 1. Core Engine & Mathematics
-* **Custom Linear Algebra Library:** Implemented a robust `Vec3` library from scratch to handle vector addition, normalization, cross/dot products, and scalar manipulation.
-* **Parametric Ray Casting:** Implements the ray equation $R(t) = \vec{O} + t\vec{D}$ to simulate light paths through a 3D viewport.
-* **Intersection Algorithms:** Uses quadratic discriminant analysis ($b^2 - 4ac$) to solve ray-sphere intersections in $O(1)$ time per object.
+* **Custom Linear Algebra Library:** Implemented a robust `Vec3` library from scratch to handle vector addition, normalization, cross/dot products, and reflection vectors.
+* **Parametric Ray Casting:** Implements the ray equation R(t) = O + tD to simulate light paths through a 3D viewport.
+* **Intersection Algorithms:** Uses quadratic discriminant analysis for spheres and Axis-Aligned Bounding Box (AABB) logic for cubic structures.
 
-### 2. Rendering Pipeline
-* **Physics-Based Lighting:** Implements diffuse shading based on surface normals and light source proximity (Inverse-Square Law fallout).
-* **Hard Shadow Casting:** Secondary ray casting passes to determine light occlusion and render realistic shadows.
-* **Anti-Aliasing (SSAA):** Implements **9-sample Grid Super-Sampling** per pixel to eliminate jagged edges and produce smooth, high-fidelity renders.
-* **Scene Graph:** Dynamic object management system using custom-built dynamic arrays (vectors) to handle scenes with $N$ spheres.
+### 2. The "Dual-Mode" Physics System
+The engine features a runtime-switchable physics pipeline that alters material properties based on the desired atmosphere:
 
-### 3. Systems Engineering
-* **Manual Memory Management:** rigorous dynamic allocation and deallocation of scene objects to ensure zero memory leaks.
-* **File I/O:** Custom encoder to serialize render data into the **PPM (Portable Pixel Map)** format for lossless image output.
-* **Hex-to-RGB Bitwise Operations:** Low-level bit manipulation to parse hexadecimal color inputs into normalized floating-point vector spaces.
-
----
-
-## 📸 Render Gallery
-
-| **Feature** | **Visual** |
+| **Day Mode** | **Night Mode** |
 | :--- | :--- |
-| **Milestone: Base Rendering**<br>Basic geometry and flat colors. | <img src="assets/MS211.png" width="400" /> |
-| **Milestone: Physics Lighting**<br>Implementation of shadows and light diffusion. | <img src="assets/MS212.png" width="400" /> |
-| **Final: Anti-Aliasing**<br>Full resolution with 9x sampling and complex geometry. | <img src="assets/FS13.png" width="400" /> |
+| **Lighting:** Directional Sunlight (Hard Shadows) | **Lighting:** Emissive Neon & Ambient Occlusion |
+| **Sky:** Linear Gradient (Blue Atmosphere) | **Sky:** Exponential Fog (Teal/Black Void) |
+| **Materials:** Glossy Plastic & Concrete | **Materials:** Procedural Grid Textures (Lit Windows) |
+| **Water:** Fresnel Reflection (Mirror-like) | **Water:** Octave Noise Distortion (Fractal Waves) |
+
+### 3. Procedural Generation
+* **City Architecture:** Python-based procedural generation scripts create massive cityscapes with randomized building heights, "monolith" structures, and street layouts.
+* **Fractal Water:** A custom shader combines low-frequency "swells" with high-frequency "grain" noise to simulate realistic liquid surfaces without using texture maps.
 
 ---
 
-## 🚀 How to Build & Run
+## Render Gallery
 
-This project uses a custom `Makefile` for compilation.
+### The Cyberpunk & Future City Collection
+*Demonstrating the Dual-Mode Engine capabilities on procedurally generated geometry.*
 
-### Prerequisites
-* GCC Compiler
-* Make
+| **Night Mode (Cyberpunk)** | **Day Mode (Future City)** |
+| :--- | :--- |
+| <img src="assets/water_city_night.png" width="100%" /> | <img src="assets/water_city_day.png" width="100%" /> |
+| *Procedural neon windows, teal fog, and distorted water reflections.* | *Directional sunlight, glossy materials, and clean atmospheric scattering.* |
 
-### Compilation
-To compile the engine with full optimization and anti-aliasing enabled:
+### The Geometric Studies
+*A series of test scenes demonstrating shadow casting, reflection recursion, and composition.*
 
-```bash
-make
+| **Scene 1: The Basics** | **Scene 2: Symmetry** |
+| :--- | :--- |
+| <img src="assets/scene_1_day.png" width="100%" /> | <img src="assets/scene_2_day.png" width="100%" /> |
+| *Testing ground plane intersections and simple shadows.* | *Testing equidistant object spacing and camera focal length.* |
+
+| **Scene 3: Depth** | **Scene 4: Complexity** |
+| :--- | :--- |
+| <img src="assets/scene_3_day.png" width="100%" /> | <img src="assets/scene_4_day.png" width="100%" /> |
+| *Testing recursive reflections on multiple surfaces.* | *Stress-testing the intersection engine with overlapping geometry.* |
+
+---
+
+## How to Build & Run
+
+This project uses a custom `Makefile` pipeline. No external libraries are required.
+
+### 1. Compile the Engine
+Compile the source code with full optimization (`-O3`) and all warnings enabled (`-Wall -Werror`).
+
+2. Generate a Scene
+Use the included Python generators to create a scene description file (test.input).
+
+For the Infinite City:
+
+Bash
+
+python water_city.py
+
+
+For Geometric Scenes:
+
+Bash
+
+python gen_scene_1.py  # (Or gen_scene_2.py, etc.)
+
+3. Render the Image
+Run the engine executable. You must specify the input file, output filename, and the render mode (day or night).
+
+To render the Cyberpunk Night scene:
+
+Bash
+
+./FS_assg test.input output_night.ppm night
+To render the Daytime scene:
+
+Bash
+
+./FS_assg test.input output_day.ppm day
+The output image will be saved as a high-resolution PPM file, which can be viewed in standard image viewers or converted to PNG/JPG.
