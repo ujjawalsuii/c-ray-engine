@@ -82,29 +82,29 @@ Compile the source code with full optimization (`-O3`) and all warnings enabled 
 
 I used: gcc -Wall -Werror -std=c99 -DFS -o FS_assg src/spheres.c src/assg.c src/vector.c src/color.c -lm
 
-2. Generate a Scene
+### 2. Generate a Scene
 Use the included Python generators to create a scene description file (test.input).
 
-For the Infinite City:
+### For the Infinite City:
 
 run the command: python water_city.py
 
 
-For Geometric Scenes:
+### For Geometric Scenes:
 
 
 run the command: python gen_scene_1.py  # (Or gen_scene_2.py, etc.)
 
-3. Render the Image
+### 3. Render the Image
 Run the engine executable. You must specify the input file, output filename, and the render mode (day or night).
 
-To render the Cyberpunk Night scene:
+### To render the Cyberpunk Night scene:
 
 
 run the script:  ./FS_assg test.input output_night.ppm night
 
 
-To render the Daytime scene:
+### To render the Daytime scene:
 All you have to do is replace the night with day, ./FS_assg test.input output_night.ppm day
 
 
