@@ -9,7 +9,7 @@
 
 <br />
 
-<img src="assets/water_city_night.png" width="100%" alt="Cyberpunk Night City Render" />
+<img src="assets/scene_2_night.png" width="100%" alt="Ray Tracing Renderer" />
 
 </div>
 
