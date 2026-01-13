@@ -104,9 +104,13 @@ Run the engine executable. You must specify the input file, output filename, and
 run the script:  ./FS_assg test.input output_night.ppm night
 
 
+
 ### To render the Daytime scene:
 All you have to do is replace the night with day, ./FS_assg test.input output_night.ppm day
 
 
 
 The output image will be saved as a high-resolution PPM file, which can be viewed in standard image viewers or converted to PNG/JPG.
+
+
+### If you do end up with difficulties please do not hesitate to reach out! Just click my profile and you will find multiple ways to contact me
