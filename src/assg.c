@@ -108,7 +108,7 @@ static Vec3 lerp(Vec3 a, Vec3 b, float t) {
 static Vec3 get_sky_color(Vec3 dir) {
     float t = dir.y; 
     
-    // FIX: Indentation Warning Fix
+    
     if (t < 0.0f) t = 0.0f; 
     if (t > 1.0f) t = 1.0f;
     
@@ -147,7 +147,7 @@ static Vec3 trace_ray(Vec3 origin, Vec3 dir, int depth, World *w) {
     }
     
     for (int i=0; i<w->cube_size; i++) {
-        // FIX: Typo 'orig' -> 'origin' fixed here
+        
         if(doesCubeIntersect(w->cubes[i], origin, dir, &t) && t < closest_t && t > REF_EPSILON) { 
             closest_t = t; 
             hit_cube = w->cubes[i]; 
@@ -263,7 +263,7 @@ static Vec3 apply_fog(Vec3 color, float dist) {
     float density = isNight ? 0.005f : 0.002f;
     float fogAmt = 1.0f - expf(-dist * density);
     
-    // FIX: Indentation Warning Fix
+    
     if (fogAmt > 1.0f) fogAmt = 1.0f; 
     if (fogAmt < 0.0f) fogAmt = 0.0f;
     
@@ -290,7 +290,7 @@ static void renderPPM(World *w, char *ppmfile) {
             }
             Vec3 final = scalarMultiply(invSamples, col);
             
-            // FIX: Indentation Warning Fix
+            
             if (final.x > 1.0f) final.x = 1.0f;
             if (final.y > 1.0f) final.y = 1.0f;
             if (final.z > 1.0f) final.z = 1.0f;
